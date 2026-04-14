@@ -17,6 +17,7 @@
  * 创建日期: 2020-01-01
  *
  * 2020-01-01: V2.2.0 增加文件说明
+ * 2026-04-14: V3.9.5 重构圆角属性编辑器
 ******************************************************************************/
 
 using System;
@@ -26,7 +27,6 @@ using System.Drawing.Design;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Windows.Forms;
-using System.Windows.Forms.Design;
 #pragma warning disable SYSLIB0003 // 类型或成员已过时
 
 namespace Sunny.UI
@@ -36,43 +36,111 @@ namespace Sunny.UI
     /// </summary>
     [ComVisible(true)]
     [ToolboxItem(false)]
-    [Editor("Sunny.UI.UIRadiusSidesEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+#if NETFRAMEWORK
+    [Editor(typeof(UIRadiusSidesEditor), typeof(UITypeEditor))]
+#endif
     [Flags]
     public enum UICornerRadiusSides
     {
         /// <summary>
-        /// 四个角都有圆角。
+        /// 没有圆角
         /// </summary>
-        All = 15, // 0x0000000F
-
-        /// <summary>
-        /// 左下角有圆角
-        /// </summary>
-        LeftBottom = 8,
+        [Description("没有圆角")]
+        None = 0,
 
         /// <summary>
         /// 左上角有圆角
         /// </summary>
+        [Description("左上角")]
         LeftTop = 1,
-
-        /// <summary>
-        /// 右下角有圆角
-        /// </summary>
-        RightBottom = 4,
 
         /// <summary>
         /// 右上角有圆角
         /// </summary>
+        [Description("右上角")]
         RightTop = 2,
 
         /// <summary>
-        /// 没有圆角
+        /// 右下角有圆角
         /// </summary>
-        None = 0,
+        [Description("右下角")]
+        RightBottom = 4,
+
+        /// <summary>
+        /// 左下角有圆角
+        /// </summary>
+        [Description("左下角")]
+        LeftBottom = 8,
+
+        /// <summary>
+        /// 顶部圆角，包括左上角和右上角
+        /// </summary>
+        [Description("顶部")]
+        Top = LeftTop | RightTop, //3
+
+        /// <summary>
+        /// 只有左上角和右下角
+        /// </summary>
+        [Description("只有左上角和右下角")]
+        TopLeftAndBottomRight = LeftTop | RightBottom, //5
+
+        /// <summary>
+        /// 右侧圆角，包括右上角和右下角
+        /// </summary>
+        [Description("右侧")]
+        Right = RightTop | RightBottom, //6
+
+        /// <summary>
+        /// 左侧圆角，包括左上角和左下角
+        /// </summary>
+        [Description("左侧")]
+        Left = LeftTop | LeftBottom, //9
+
+        /// <summary>
+        /// 只有右上角和左下角
+        /// </summary>
+        [Description("只有右上角和左下角")]
+        TopRightAndBottomLeft = RightTop | LeftBottom, //10
+
+        /// <summary>
+        /// 底部圆角，包括左下角和右下角
+        /// </summary>
+        [Description("底部")]
+        Bottom = LeftBottom | RightBottom, //12
+
+        /// <summary>
+        /// 除了左下角以外的圆角
+        /// </summary>
+        [Description("除了左下角以外的圆角")]
+        ExceptLeftBottom = LeftTop | RightTop | RightBottom, //7
+
+        /// <summary>
+        /// 除了右下角以外的圆角
+        /// </summary>
+        [Description("除了右下角以外的圆角")]
+        ExceptRightBottom = LeftTop | RightTop | LeftBottom, //11
+
+        /// <summary>
+        /// 除了右上角以外的圆角
+        /// </summary>
+        [Description("除了右上角以外的圆角")]
+        ExceptRightTop = LeftTop | LeftBottom | RightBottom, //13
+
+        /// <summary>
+        /// 除了左上角以外的圆角
+        /// </summary>
+        [Description("除了左上角以外的圆角")]
+        ExceptLeftTop = RightTop | RightBottom | LeftBottom, //14
+
+        /// <summary>
+        /// 四个角都有圆角。
+        /// </summary>
+        [Description("全部")]
+        All = 15, // 0x0000000F
     }
 
     /// <summary>
-    ///   提供设置的编辑器 <see cref="P:System.Windows.Forms.ToolStripStatusLabel.RectSides" /> 属性。
+    ///   提供设置的编辑器属性。
     /// </summary>
     [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
     public class UIRadiusSidesEditor : UIDropEditor
@@ -92,7 +160,6 @@ namespace Sunny.UI
         [ToolboxItem(false)]
         public class UICornerRadiusSidesUI : UIDropEditorUI
         {
-            private TableLayoutPanel tableLayoutPanel1;
             private CheckBox allCheckBox;
             private CheckBox noneCheckBox;
             private CheckBox leftTopCheckBox;
@@ -201,9 +268,7 @@ namespace Sunny.UI
 
             private void InitializeComponent()
             {
-                ComponentResourceManager componentResourceManager = new ComponentResourceManager(typeof(BorderSidesEditor));
                 Height = 163;
-                tableLayoutPanel1 = new TableLayoutPanel();
                 noneCheckBox = new CheckBox();
                 allCheckBox = new CheckBox();
                 leftTopCheckBox = new CheckBox();
@@ -211,70 +276,60 @@ namespace Sunny.UI
                 leftBottomCheckBox = new CheckBox();
                 rightBottomCheckBox = new CheckBox();
                 splitterLabel = new Label();
-                tableLayoutPanel1.SuspendLayout();
                 SuspendLayout();
-                componentResourceManager.ApplyResources(tableLayoutPanel1, "tableLayoutPanel1");
-                tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-                tableLayoutPanel1.BackColor = SystemColors.Window;
-                tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
-                tableLayoutPanel1.Controls.Add(noneCheckBox, 0, 0);
-                tableLayoutPanel1.Controls.Add(allCheckBox, 0, 2);
-                tableLayoutPanel1.Controls.Add(leftTopCheckBox, 0, 3);
-                tableLayoutPanel1.Controls.Add(rightTopCheckBox, 0, 4);
-                tableLayoutPanel1.Controls.Add(leftBottomCheckBox, 0, 5);
-                tableLayoutPanel1.Controls.Add(rightBottomCheckBox, 0, 6);
-                tableLayoutPanel1.Controls.Add(splitterLabel, 0, 1);
-                tableLayoutPanel1.Name = "tableLayoutPanel1";
-                tableLayoutPanel1.RowStyles.Add(new RowStyle());
-                tableLayoutPanel1.RowStyles.Add(new RowStyle());
-                tableLayoutPanel1.RowStyles.Add(new RowStyle());
-                tableLayoutPanel1.RowStyles.Add(new RowStyle());
-                tableLayoutPanel1.RowStyles.Add(new RowStyle());
-                tableLayoutPanel1.RowStyles.Add(new RowStyle());
-                tableLayoutPanel1.RowStyles.Add(new RowStyle());
-                tableLayoutPanel1.Margin = new Padding(0);
 
-                noneCheckBox.Name = "noneCheckBox";
+                noneCheckBox.Name = "_noneCheckBox";
                 noneCheckBox.Margin = new Padding(3, 3, 3, 1);
-                noneCheckBox.Text = "无(&N)";
+                noneCheckBox.Text = @"无(&N)";
                 noneCheckBox.Height = 20;
-
-                allCheckBox.Name = "allCheckBox";
-                allCheckBox.Margin = new Padding(3, 3, 3, 1);
-                allCheckBox.Text = "全部(&A)";
-                allCheckBox.Height = 20;
-
-                leftTopCheckBox.Margin = new Padding(20, 1, 3, 1);
-                leftTopCheckBox.Name = "leftTopCheckBox";
-                leftTopCheckBox.Text = "左上角(&LT)";
-                leftTopCheckBox.Height = 20;
-
-                rightTopCheckBox.Margin = new Padding(20, 1, 3, 1);
-                rightTopCheckBox.Name = "rightTopCheckBox";
-                rightTopCheckBox.Text = "右上角(&RT)";
-                rightTopCheckBox.Height = 20;
-
-                leftBottomCheckBox.Margin = new Padding(20, 1, 3, 1);
-                leftBottomCheckBox.Name = "leftBottomCheckBox";
-                leftBottomCheckBox.Text = "左下角(&LB)";
-                leftBottomCheckBox.Height = 20;
-
-                rightBottomCheckBox.Margin = new Padding(20, 1, 3, 1);
-                rightBottomCheckBox.Name = "rightBottomCheckBox";
-                rightBottomCheckBox.Text = "右下角(&RB)";
-                rightBottomCheckBox.Height = 20;
+                noneCheckBox.Location = new Point(5, 4);
 
                 splitterLabel.BackColor = SystemColors.ControlDark;
-                splitterLabel.Name = "splitterLabel";
+                splitterLabel.Name = "_splitterLabel";
                 splitterLabel.Height = 1;
+                splitterLabel.Location = new Point(5, 26);
 
-                Controls.Add(tableLayoutPanel1);
+                allCheckBox.Name = "_allCheckBox";
+                allCheckBox.Margin = new Padding(3, 3, 3, 1);
+                allCheckBox.Text = @"全部(&A)";
+                allCheckBox.Height = 20;
+                allCheckBox.Location = new Point(5, 31);
+
+                leftTopCheckBox.Margin = new Padding(20, 1, 3, 1);
+                leftTopCheckBox.Name = "_leftTopCheckBox";
+                leftTopCheckBox.Text = @"左上角(&LT)";
+                leftTopCheckBox.Height = 20;
+                leftTopCheckBox.Location = new Point(24, 54);
+
+                rightTopCheckBox.Margin = new Padding(20, 1, 3, 1);
+                rightTopCheckBox.Name = "_rightTopCheckBox";
+                rightTopCheckBox.Text = @"右上角(&RT)";
+                rightTopCheckBox.Height = 20;
+                rightTopCheckBox.Location = new Point(24, 78);
+
+                leftBottomCheckBox.Margin = new Padding(20, 1, 3, 1);
+                leftBottomCheckBox.Name = "_leftBottomCheckBox";
+                leftBottomCheckBox.Text = @"左下角(&LB)";
+                leftBottomCheckBox.Height = 20;
+                leftBottomCheckBox.Location = new Point(24, 102);
+
+                rightBottomCheckBox.Margin = new Padding(20, 1, 3, 1);
+                rightBottomCheckBox.Name = "_rightBottomCheckBox";
+                rightBottomCheckBox.Text = @"右下角(&RB)";
+                rightBottomCheckBox.Height = 20;
+                rightBottomCheckBox.Location = new Point(24, 126);
+
+                Controls.Add(noneCheckBox);
+                Controls.Add(splitterLabel);
+                Controls.Add(allCheckBox);
+                Controls.Add(leftTopCheckBox);
+                Controls.Add(rightTopCheckBox);
+                Controls.Add(leftBottomCheckBox);
+                Controls.Add(rightBottomCheckBox);
                 Padding = new Padding(1, 1, 1, 1);
                 AutoSizeMode = AutoSizeMode.GrowAndShrink;
                 AutoScaleMode = AutoScaleMode.None;
                 AutoScaleDimensions = new SizeF(6f, 13f);
-                tableLayoutPanel1.ResumeLayout(false);
-                tableLayoutPanel1.PerformLayout();
                 ResumeLayout(false);
                 PerformLayout();
                 leftBottomCheckBox.CheckedChanged += leftBottomCheckBox_CheckedChanged;
