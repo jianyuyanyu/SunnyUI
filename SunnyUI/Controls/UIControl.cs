@@ -981,22 +981,6 @@ namespace Sunny.UI
             }
         }
 
-        /// <summary>引发 <see cref="E:System.Windows.Forms.Control.GotFocus" /> 事件。</summary>
-        /// <param name="e">包含事件数据的 <see cref="T:System.EventArgs" />。</param>
-        protected override void OnGotFocus(EventArgs e)
-        {
-            base.OnGotFocus(e);
-            this.Invalidate();
-        }
-
-        /// <summary>引发 <see cref="M:System.Windows.Forms.ButtonBase.OnLostFocus(System.EventArgs)" /> 事件。</summary>
-        /// <param name="e">包含事件数据的 <see cref="T:System.EventArgs" />。</param>
-        protected override void OnLostFocus(EventArgs e)
-        {
-            base.OnLostFocus(e);
-            this.Invalidate();
-        }
-
         [Description("开启后可响应某些触屏的点击事件"), Category("SunnyUI")]
         [DefaultValue(false)]
         public bool TouchPressClick { get; set; } = false;
