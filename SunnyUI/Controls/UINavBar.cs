@@ -23,7 +23,7 @@
  * 2021-08-07: V3.0.5 显示/隐藏子节点提示箭头，增加选中项圆角
  * 2022-03-19: V3.1.1 重构主题配色
  * 2022-04-14: V3.1.3 重构扩展函数
- * 2022-07-28: V3.2.2 删除界面此控件的编辑器 
+ * 2022-07-28: V3.2.2 删除界面此控件的编辑器
  * 2023-02-22: V3.3.2 去除下拉菜单宽度调整
  * 2023-05-12: V3.3.6 重构DrawString函数
  * 2023-05-16: V3.3.6 重构DrawFontImage函数
@@ -31,6 +31,7 @@
  * 2023-10-17: V3.5.1 ImageList为空时，下拉菜单增加Symbol绘制
  * 2023-11-16: V3.5.2 重构主题
  * 2024-11-11: V3.7.2 增加StyleDropDown属性，手动修改Style时设置此属性以修改下拉框主题
+ * 2026-04-14: V3.9.5 更新属性编辑器
 ******************************************************************************/
 
 using System;
@@ -327,7 +328,7 @@ namespace Sunny.UI
         [Localizable(true)]
         [MergableProperty(false)]
         [Description("菜单栏显示节点集合"), Category("SunnyUI")]
-        //[Editor("System.Windows.Forms.Design.TreeNodeCollectionEditor", typeof(UITypeEditor))]
+        [Editor("System.ComponentModel.Design.CollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         public TreeNodeCollection Nodes => Menu.Nodes;
 
         [DefaultValue(null)]

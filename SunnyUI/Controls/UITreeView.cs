@@ -39,6 +39,7 @@
  * 2024-01-20: V3.6.3 自定义行颜色，可通过代码给颜色值，SetNodePainter，增加选中颜色
  * 2024-05-27: V3.6.6 防止控件闪烁
  * 2024-08-06: V3.6.8 不显示连线时，重绘节点前展开与收缩的图标
+ * 2026-04-14: V3.9.5 更新属性编辑器
 ******************************************************************************/
 
 using System;
@@ -676,6 +677,7 @@ namespace Sunny.UI
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Localizable(true)]
         [MergableProperty(false)]
+        [Editor("System.ComponentModel.Design.CollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         public TreeNodeCollection Nodes => view.Nodes;
 
         public event TreeViewCancelEventHandler BeforeCheck;
