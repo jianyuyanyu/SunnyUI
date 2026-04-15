@@ -39,7 +39,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
@@ -788,7 +787,7 @@ namespace Sunny.UI
         [Description("文本返回值"), Category("SunnyUI")]
         [Browsable(true)]
         [DefaultValue("")]
-        [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         public override string Text
         {
             get => base.Text;

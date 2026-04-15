@@ -57,9 +57,9 @@ namespace Sunny.UI
         private void InitializeComponent()
         {
             SuspendLayout();
-            // 
+            //
             // UIComboTreeView
-            // 
+            //
             DropDownStyle = UIDropDownStyle.DropDownList;
             Name = "UIComboTreeView";
             ButtonClick += UIComboTreeView_ButtonClick;
@@ -80,12 +80,12 @@ namespace Sunny.UI
             }
         }
 
-        /// <summary> 
+        /// <summary>
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary> 
+        /// <summary>
         /// 清理所有正在使用的资源。
         /// </summary>
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
@@ -145,6 +145,11 @@ namespace Sunny.UI
         [Localizable(true)]
         [MergableProperty(false)]
         [Description("显示节点集合"), Category("SunnyUI")]
+#if NET8_0_OR_GREATER
+        [Editor("System.ComponentModel.Design.CollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
+#else
+        [Editor("System.Windows.Forms.Design.TreeNodeCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
+#endif
         public TreeNodeCollection Nodes => item.TreeView.Nodes;
 
         [DefaultValue(false), Description("是否显示单选框,该属性与CanSelectRootNode互斥"), Category("SunnyUI")]

@@ -68,7 +68,7 @@ namespace Sunny.UI
             set => UIStyles.DPIScale = value;
         }
 
-        [Editor("System.Drawing.Design.FontNameEditor", "System.Drawing.Design.UITypeEditor")]
+        [Editor("System.Drawing.Design.FontNameEditor, System.Drawing.Design", "System.Drawing.Design.UITypeEditor")]
         [TypeConverter(typeof(FontNameConverter))]
         [DefaultValue("宋体")]
         [Description("全局字体设置开启后，可调字体名称"), Category("SunnyUI")]

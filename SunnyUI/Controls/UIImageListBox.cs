@@ -30,7 +30,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
@@ -438,7 +437,7 @@ namespace Sunny.UI
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Localizable(true)]
-        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [MergableProperty(false)]
         [Browsable(false)]
         [Description("列表项"), Category("SunnyUI")]

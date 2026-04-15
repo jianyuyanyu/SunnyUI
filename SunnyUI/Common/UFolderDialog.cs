@@ -49,14 +49,14 @@ namespace Sunny.UI
     /// Vista 样式的选择文件对话框的基类
     /// </summary>
     [Description("提供一个Vista样式的选择文件对话框")]
-    [Editor(typeof(FolderNameEditorEx), typeof(UITypeEditor))]
+    [Editor(typeof(Sunny.UI.FolderNameEditorEx), typeof(System.Drawing.Design.UITypeEditor))]
     [ToolboxItem(false)]
     public class FolderBrowserDialogEx : Component
     {
         #region Public Property
 
-        // 
-        // 摘要: 
+        //
+        // 摘要:
         //     获取或设置对话框中在树视图控件上显示的说明文本。
         //
         // 返回结果:

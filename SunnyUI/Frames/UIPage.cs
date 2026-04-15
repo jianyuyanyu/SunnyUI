@@ -51,7 +51,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Windows.Forms;
 
 namespace Sunny.UI
@@ -364,7 +363,7 @@ namespace Sunny.UI
         /// 字体图标
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        [Editor("Sunny.UI.UIImagePropertyEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor(typeof(Sunny.UI.UIImagePropertyEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [DefaultValue(0)]
         [Description("字体图标"), Category("SunnyUI")]
         public int Symbol
@@ -837,7 +836,7 @@ namespace Sunny.UI
         private int extendSymbol;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        [Editor("Sunny.UI.UIImagePropertyEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor(typeof(Sunny.UI.UIImagePropertyEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [DefaultValue(0)]
         [Description("扩展按钮字体图标"), Category("SunnyUI")]
         public int ExtendSymbol

@@ -56,7 +56,7 @@ namespace Sunny.UI
 
         public static bool ZoomScale { get; set; }
 
-        [Editor("System.Drawing.Design.FontNameEditor", "System.Drawing.Design.UITypeEditor")]
+        [Editor("System.Drawing.Design.FontNameEditor, System.Drawing.Design", "System.Drawing.Design.UITypeEditor")]
         [TypeConverter(typeof(FontNameConverter))]
         public static string GlobalFontName { get; set; } = "宋体";
 

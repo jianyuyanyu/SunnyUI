@@ -37,9 +37,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Windows.Forms;
-using static System.Windows.Forms.ListBox;
 
 namespace Sunny.UI
 {
@@ -367,7 +365,7 @@ namespace Sunny.UI
 
         [DefaultValue(SelectionMode.One)]
         [Description("选择项所用方法"), Category("SunnyUI")]
-        public SelectedIndexCollection SelectedIndices
+        public ListBox.SelectedIndexCollection SelectedIndices
         {
             get => listbox.SelectedIndices;
         }
@@ -394,7 +392,7 @@ namespace Sunny.UI
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public SelectedObjectCollection SelectedItems
+        public ListBox.SelectedObjectCollection SelectedItems
         {
             get => listbox.SelectedItems;
         }
@@ -586,7 +584,7 @@ namespace Sunny.UI
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Localizable(true)]
-        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor", typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [MergableProperty(false)]
         [Description("列表项"), Category("SunnyUI")]
         public ListBox.ObjectCollection Items => listbox.Items;
@@ -667,8 +665,8 @@ namespace Sunny.UI
 
         [DefaultValue("")]
         [Description("指示要为此控件中的项显示的属性")]
-        [TypeConverter("System.Windows.Forms.Design.DataMemberFieldConverter, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-        [Editor("System.Windows.Forms.Design.DataMemberFieldEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [TypeConverter("System.Windows.Forms.Design.DataMemberFieldConverter, System.Design")]
+        [Editor("System.Windows.Forms.Design.DataMemberFieldEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         public string DisplayMember
         {
             get => listbox.DisplayMember;
@@ -677,7 +675,7 @@ namespace Sunny.UI
 
         [DefaultValue("")]
         [Description("指示用作控件中项的实际值的属性")]
-        [Editor("System.Windows.Forms.Design.DataMemberFieldEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.DataMemberFieldEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         public string ValueMember
         {
             get => listbox.ValueMember;

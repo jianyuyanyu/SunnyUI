@@ -48,7 +48,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
@@ -547,8 +546,7 @@ namespace Sunny.UI
         [Localizable(true)]
         [RefreshProperties(RefreshProperties.Repaint)]
         [TypeConverter(typeof(NoneExcludedImageIndexConverter))]
-        [Editor("System.Windows.Forms.Design.ImageIndexEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ImageIndexEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [RelatedImageList("ImageList")]
         public int ImageIndex
         {
@@ -558,8 +556,7 @@ namespace Sunny.UI
 
         [Localizable(true)]
         [TypeConverter(typeof(ImageKeyConverter))]
-        [Editor("System.Windows.Forms.Design.ImageIndexEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ImageIndexEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [DefaultValue("")]
         [RefreshProperties(RefreshProperties.Repaint)]
         [RelatedImageList("ImageList")]
@@ -609,8 +606,7 @@ namespace Sunny.UI
         [DefaultValue(-1)]
         [TypeConverter(typeof(NoneExcludedImageIndexConverter))]
         [Localizable(true)]
-        [Editor("System.Windows.Forms.Design.ImageIndexEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ImageIndexEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [RelatedImageList("ImageList")]
         public int SelectedImageIndex
         {
@@ -620,8 +616,7 @@ namespace Sunny.UI
 
         [Localizable(true)]
         [TypeConverter(typeof(ImageKeyConverter))]
-        [Editor("System.Windows.Forms.Design.ImageIndexEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ImageIndexEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [DefaultValue("")]
         [RefreshProperties(RefreshProperties.Repaint)]
         [RelatedImageList("ImageList")]
@@ -677,7 +672,11 @@ namespace Sunny.UI
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Localizable(true)]
         [MergableProperty(false)]
+#if NET8_0_OR_GREATER
         [Editor("System.ComponentModel.Design.CollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
+#else
+        [Editor("System.Windows.Forms.Design.TreeNodeCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
+#endif
         public TreeNodeCollection Nodes => view.Nodes;
 
         public event TreeViewCancelEventHandler BeforeCheck;

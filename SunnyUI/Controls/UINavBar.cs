@@ -328,7 +328,11 @@ namespace Sunny.UI
         [Localizable(true)]
         [MergableProperty(false)]
         [Description("菜单栏显示节点集合"), Category("SunnyUI")]
+#if NET8_0_OR_GREATER
         [Editor("System.ComponentModel.Design.CollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
+#else
+        [Editor("System.Windows.Forms.Design.TreeNodeCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
+#endif
         public TreeNodeCollection Nodes => Menu.Nodes;
 
         [DefaultValue(null)]

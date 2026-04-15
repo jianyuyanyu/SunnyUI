@@ -35,7 +35,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Windows.Forms;
 
 namespace Sunny.UI
@@ -133,7 +132,7 @@ namespace Sunny.UI
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Localizable(true)]
-        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [MergableProperty(false)]
         [Description("获取该多选框组中项的集合"), Category("SunnyUI")]
         public UIObjectCollection Items => items;

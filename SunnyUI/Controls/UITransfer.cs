@@ -27,7 +27,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Drawing.Design;
 using System.Windows.Forms;
 
 namespace Sunny.UI
@@ -86,7 +85,7 @@ namespace Sunny.UI
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Localizable(true)]
-        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [MergableProperty(false)]
         [Description("左侧列表"), Category("SunnyUI")]
         public ListBox.ObjectCollection ItemsLeft => l1.Items;
@@ -96,7 +95,7 @@ namespace Sunny.UI
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Localizable(true)]
-        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [MergableProperty(false)]
         [Description("右侧列表"), Category("SunnyUI")]
         public ListBox.ObjectCollection ItemsRight => l2.Items;

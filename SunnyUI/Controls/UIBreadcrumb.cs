@@ -30,7 +30,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
@@ -104,7 +103,7 @@ namespace Sunny.UI
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [Localizable(true)]
-        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         [MergableProperty(false)]
         [Description("列表项"), Category("SunnyUI")]
         public UIObjectCollection Items => items;

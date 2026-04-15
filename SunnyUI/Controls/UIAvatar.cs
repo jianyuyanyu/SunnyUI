@@ -14,7 +14,7 @@
  * 文件名称: UIAvatar.cs
  * 文件说明: 头像
  * 当前版本: V3.1
- * 创建日期: 2020-01-01
+ * 创建日期: F2020-01-01
  *
  * 2020-01-01: V2.2.0 增加文件说明
  * 2022-03-19: V3.1.1 重构主题配色
@@ -25,7 +25,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
@@ -212,7 +211,7 @@ namespace Sunny.UI
         /// 字体图标
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        [Editor("Sunny.UI.UIImagePropertyEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor(typeof(Sunny.UI.UIImagePropertyEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [DefaultValue(61447), Description("字体图标"), Category("SunnyUI")]
         public int Symbol
         {

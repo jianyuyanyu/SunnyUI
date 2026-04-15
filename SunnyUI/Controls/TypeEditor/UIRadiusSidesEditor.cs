@@ -23,7 +23,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Windows.Forms;
@@ -37,7 +36,7 @@ namespace Sunny.UI
     [ComVisible(true)]
     [ToolboxItem(false)]
 #if NETFRAMEWORK
-    [Editor(typeof(UIRadiusSidesEditor), typeof(UITypeEditor))]
+    [Editor(typeof(Sunny.UI.UIRadiusSidesEditor), typeof(System.Drawing.Design.UITypeEditor))]
 #endif
     [Flags]
     public enum UICornerRadiusSides

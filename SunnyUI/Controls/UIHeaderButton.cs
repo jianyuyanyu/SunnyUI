@@ -34,7 +34,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
@@ -415,7 +414,7 @@ namespace Sunny.UI
         /// 字体图标
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        [Editor("Sunny.UI.UIImagePropertyEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor(typeof(Sunny.UI.UIImagePropertyEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [DefaultValue(61452)]
         [Description("字体图标"), Category("SunnyUI")]
         public int Symbol

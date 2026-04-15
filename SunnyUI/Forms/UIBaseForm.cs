@@ -27,7 +27,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -580,7 +579,7 @@ namespace Sunny.UI
         private int extendSymbol = 0;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        [Editor("Sunny.UI.UIImagePropertyEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor(typeof(Sunny.UI.UIImagePropertyEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [DefaultValue(0)]
         [Description("扩展按钮字体图标"), Category("SunnyUI")]
         public int ExtendSymbol

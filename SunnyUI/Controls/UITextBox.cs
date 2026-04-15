@@ -70,7 +70,6 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Windows.Forms;
 
 namespace Sunny.UI
@@ -908,7 +907,7 @@ namespace Sunny.UI
         [Description("文本返回值"), Category("SunnyUI")]
         [Browsable(true)]
         [DefaultValue("")]
-        [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         public override string Text
         {
             get => edit.Text;
@@ -1130,7 +1129,7 @@ namespace Sunny.UI
         [
             DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
             Localizable(true),
-            Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor)),
+            Editor("System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor)),
             Browsable(true),
             EditorBrowsable(EditorBrowsableState.Always)
         ]
@@ -1214,7 +1213,7 @@ namespace Sunny.UI
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             MergableProperty(false),
             Localizable(true),
-            Editor("System.Windows.Forms.Design.StringArrayEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))
+            Editor("System.Windows.Forms.Design.StringArrayEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))
         ]
         public string[] Lines
         {
@@ -1417,7 +1416,7 @@ namespace Sunny.UI
         /// 字体图标
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        [Editor("Sunny.UI.UIImagePropertyEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor(typeof(Sunny.UI.UIImagePropertyEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [DefaultValue(0)]
         [Description("字体图标"), Category("SunnyUI")]
         public int Symbol
@@ -1488,7 +1487,7 @@ namespace Sunny.UI
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        [Editor("Sunny.UI.UIImagePropertyEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor(typeof(Sunny.UI.UIImagePropertyEditor), typeof(System.Drawing.Design.UITypeEditor))]
         [DefaultValue(361761)]
         [Description("按钮字体图标"), Category("SunnyUI")]
         public int ButtonSymbol

@@ -39,7 +39,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
@@ -301,7 +300,7 @@ namespace Sunny.UI
 
         [DefaultValue(61703)]
         [Description("正常显示时字体图标"), Category("SunnyUI")]
-        [Editor("Sunny.UI.UIImagePropertyEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor(typeof(Sunny.UI.UIImagePropertyEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public int SymbolNormal
         {
             get => symbolNormal;
@@ -314,7 +313,7 @@ namespace Sunny.UI
 
         [DefaultValue(61702)]
         [Description("下拉框显示时字体图标"), Category("SunnyUI")]
-        [Editor("Sunny.UI.UIImagePropertyEditor, " + AssemblyRefEx.SystemDesign, typeof(UITypeEditor))]
+        [Editor(typeof(Sunny.UI.UIImagePropertyEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public int SymbolDropDown { get; set; } = 61702;
 
         protected virtual void CreateInstance()

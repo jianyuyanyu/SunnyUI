@@ -40,7 +40,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
@@ -811,7 +810,7 @@ namespace Sunny.UI
         [Description("文本返回值"), Category("SunnyUI")]
         [Browsable(true)]
         [DefaultValue("")]
-        [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
+        [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design", typeof(System.Drawing.Design.UITypeEditor))]
         public override string Text
         {
             get => _edit.Text;
@@ -963,7 +962,7 @@ namespace Sunny.UI
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             MergableProperty(false),
             Localizable(true),
-            Editor("System.Windows.Forms.Design.StringArrayEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))
+            Editor("System.Windows.Forms.Design.StringArrayEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(System.Drawing.Design.UITypeEditor))
         ]
         public string[] Lines
         {
