@@ -29,12 +29,10 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using static System.Drawing.FontConverter;
 
 namespace Sunny.UI
 {
@@ -56,8 +54,6 @@ namespace Sunny.UI
 
         public static bool ZoomScale { get; set; }
 
-        [Editor("System.Drawing.Design.FontNameEditor, System.Drawing.Design", "System.Drawing.Design.UITypeEditor")]
-        [TypeConverter(typeof(FontNameConverter))]
         public static string GlobalFontName { get; set; } = "宋体";
 
         public static int GlobalFontScale { get; set; } = 100;
