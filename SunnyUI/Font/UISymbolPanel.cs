@@ -18,6 +18,7 @@
  *
  * 2023-11-28: V3.6.1 增加文件说明
  * 2024-02-20: V3.6.3 设置默认尺寸
+ * 2026-04-29: V3.9.6 选中图标时，自动复制到剪贴板
 ******************************************************************************/
 
 using System;
@@ -242,7 +243,10 @@ namespace Sunny.UI
         {
             base.OnMouseClick(e);
             if (SelectedIndex >= 0 && SelectedIndex < Symbols.Count)
+            {
                 ValueChanged?.Invoke(this, Symbols[SelectedIndex]);
+                Clipboard.SetText(Symbols[SelectedIndex].Value.ToString());
+            }
         }
 
         public event OnSymbolValueChanged ValueChanged;
