@@ -26,6 +26,7 @@
  * 2024-07-21: V3.6.8 修改属性与UIForm兼容
  * 2024-07-26: V3.6.8 修复鼠标点击事件
  * 2025-07-11: V3.8.6 调整标题栏 ExtendMenu 显示位置
+ * 2026-04-29: V3.9.6 调整窗体右上角控制按钮的绘制区域
 ******************************************************************************/
 
 using System;
@@ -499,13 +500,13 @@ namespace Sunny.UI
 
             if (ControlBox)
             {
-                ControlBoxRect = new Rectangle(Width - 6 - 28, titleHeight / 2 - 14, 28, 28);
-                ControlBoxLeft = ControlBoxRect.Left - 2;
+                ControlBoxRect = new Rectangle(Width - 44, 0, 44, TitleHeight);
+                ControlBoxLeft = ControlBoxRect.Left;
 
                 if (MaximizeBox)
                 {
-                    MaximizeBoxRect = new Rectangle(ControlBoxRect.Left - 28 - 2, ControlBoxRect.Top, 28, 28);
-                    ControlBoxLeft = MaximizeBoxRect.Left - 2;
+                    MaximizeBoxRect = new Rectangle(ControlBoxRect.Left - 44, 0, 44, TitleHeight);
+                    ControlBoxLeft = MaximizeBoxRect.Left;
                 }
                 else
                 {
@@ -514,8 +515,8 @@ namespace Sunny.UI
 
                 if (MinimizeBox)
                 {
-                    MinimizeBoxRect = new Rectangle(MaximizeBox ? MaximizeBoxRect.Left - 28 - 2 : ControlBoxRect.Left - 28 - 2, ControlBoxRect.Top, 28, 28);
-                    ControlBoxLeft = MinimizeBoxRect.Left - 2;
+                    MinimizeBoxRect = new Rectangle(MaximizeBox ? MaximizeBoxRect.Left - 44 : ControlBoxRect.Left - 44, 0, 44, TitleHeight);
+                    ControlBoxLeft = MinimizeBoxRect.Left;
                 }
                 else
                 {
@@ -526,17 +527,15 @@ namespace Sunny.UI
                 {
                     if (MinimizeBox)
                     {
-                        ExtendBoxRect = new Rectangle(MinimizeBoxRect.Left - 28 - 2, ControlBoxRect.Top, 28, 28);
+                        ExtendBoxRect = new Rectangle(MinimizeBoxRect.Left - 44, 0, 44, TitleHeight);
                     }
                     else
                     {
-                        ExtendBoxRect = new Rectangle(ControlBoxRect.Left - 28 - 2, ControlBoxRect.Top, 28, 28);
+                        ExtendBoxRect = new Rectangle(ControlBoxRect.Left - 44, 0, 44, TitleHeight);
                     }
 
-                    ControlBoxLeft = ExtendBoxRect.Left - 2;
+                    ControlBoxLeft = ExtendBoxRect.Left;
                 }
-
-                if (ControlBoxLeft != Width) ControlBoxLeft -= 6;
             }
             else
             {

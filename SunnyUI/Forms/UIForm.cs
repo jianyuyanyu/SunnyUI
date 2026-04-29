@@ -64,6 +64,7 @@
  * 2025-01-09: V3.8.1 修复窗体边框显示不全 #IBGJBS
  * 2025-07-11: V3.8.6 调整标题栏 ExtendMenu 显示位置
  * 2025-12-10: V3.9.0 修改无边框窗体默认最大化的方式
+ * 2026-04-29: V3.9.6 调整窗体右上角控制按钮的绘制区域
 ******************************************************************************/
 
 using System;
@@ -176,13 +177,13 @@ namespace Sunny.UI
 
             if (ControlBox)
             {
-                ControlBoxRect = new Rectangle(Width - 6 - 28, titleHeight / 2 - 14, 28, 28);
-                ControlBoxLeft = ControlBoxRect.Left - 2;
+                ControlBoxRect = new Rectangle(Width - 44, 0, 44, TitleHeight);
+                ControlBoxLeft = ControlBoxRect.Left;
 
                 if (MaximizeBox)
                 {
-                    MaximizeBoxRect = new Rectangle(ControlBoxRect.Left - 28 - 2, ControlBoxRect.Top, 28, 28);
-                    ControlBoxLeft = MaximizeBoxRect.Left - 2;
+                    MaximizeBoxRect = new Rectangle(ControlBoxRect.Left - 44, 0, 44, TitleHeight);
+                    ControlBoxLeft = MaximizeBoxRect.Left;
                 }
                 else
                 {
@@ -191,8 +192,8 @@ namespace Sunny.UI
 
                 if (MinimizeBox)
                 {
-                    MinimizeBoxRect = new Rectangle(MaximizeBox ? MaximizeBoxRect.Left - 28 - 2 : ControlBoxRect.Left - 28 - 2, ControlBoxRect.Top, 28, 28);
-                    ControlBoxLeft = MinimizeBoxRect.Left - 2;
+                    MinimizeBoxRect = new Rectangle(MaximizeBox ? MaximizeBoxRect.Left - 44 : ControlBoxRect.Left - 44, 0, 44, TitleHeight);
+                    ControlBoxLeft = MinimizeBoxRect.Left;
                 }
                 else
                 {
@@ -203,17 +204,15 @@ namespace Sunny.UI
                 {
                     if (MinimizeBox)
                     {
-                        ExtendBoxRect = new Rectangle(MinimizeBoxRect.Left - 28 - 2, ControlBoxRect.Top, 28, 28);
+                        ExtendBoxRect = new Rectangle(MinimizeBoxRect.Left - 44, 0, 44, TitleHeight);
                     }
                     else
                     {
-                        ExtendBoxRect = new Rectangle(ControlBoxRect.Left - 28 - 2, ControlBoxRect.Top, 28, 28);
+                        ExtendBoxRect = new Rectangle(ControlBoxRect.Left - 44, 0, 44, TitleHeight);
                     }
 
-                    ControlBoxLeft = ExtendBoxRect.Left - 2;
+                    ControlBoxLeft = ExtendBoxRect.Left;
                 }
-
-                if (ControlBoxLeft != Width) ControlBoxLeft -= 6;
             }
             else
             {
@@ -314,6 +313,7 @@ namespace Sunny.UI
             if (InControlBox || InMaxBox || InMinBox || InExtendBox) return;
             if (!ShowTitle) return;
             if (e.Y > Padding.Top) return;
+            if (e.X > ControlBoxLeft) return;
 
             if (e.Button == MouseButtons.Left && Movable)
             {
